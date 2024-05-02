@@ -4,11 +4,10 @@ clear all
 close all
 
 %%%%%%%% topotoolbox paths
-addpath('/Users/adamsmith/Library/CloudStorage/OneDrive-UniversityCollegeLondon/topography_inversions/topotoolbox-master')
-addpath('/Users/adamsmith/Library/CloudStorage/OneDrive-UniversityCollegeLondon/topography_inversions/kml_shapefile')
-addpath('/Users/adamsmith/Library/CloudStorage/OneDrive-UniversityCollegeLondon/topography_inversions/topotoolbox-master/utilities')
+addpath('PATH_TO_TOPOTOOLBOX/topotoolbox-master')
+addpath('PATH_TO_TOPOTOOLBOX/topotoolbox-master/utilities')
 
-DEM = GRIDobj('DEM/clearwater_2.tif');
+DEM = GRIDobj('PATH_TO_DEM/clearwater_2.tif');
 DEM.cellsize = 30;
 DEM.Z(DEM.Z <= 0) = NaN;
 FD = FLOWobj(DEM,'preprocess','carve');
@@ -24,7 +23,7 @@ mPerDegree = pi*radiusEarth/180;
 
 
 %read in kml file and convert to shapefile
-fault = kml_shapefile('/Users/adamsmith/Library/CloudStorage/OneDrive-UniversityCollegeLondon/PhD/clearwater_catchment/outlet.kml');
+fault = kml_shapefile('outlet.kml');
 lon = fault.X;
 lat = fault.Y;
  
@@ -73,8 +72,6 @@ for i = 1:length(S.ix)
     end
 end
 
-
-
 %calculate distance between nodes
 d = distance(S, 'node_to_node');
 d = d(S.ixc);
@@ -88,7 +85,7 @@ for i = 1:length(x)
 end
 
 mn_vec = [0.3:0.02:0.6];
-misfit_matrix = zeros(1, numel(mn_vec)); %you're a fuckking idiot on this one fella
+misfit_matrix = zeros(1, numel(mn_vec));
 
 pene = ones(size(S.ixc));
 
@@ -574,8 +571,7 @@ fprintf(1,'Assembling W \n');
         
         alpha = 10000;
         lambda = 1000000000;
-        %alpha = 100000;
-        %lambda = 100
+       
         
         
 
