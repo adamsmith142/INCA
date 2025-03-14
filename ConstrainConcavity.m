@@ -17,7 +17,7 @@ AS = flowacc(FD);
 
 %degree to metre calculation
 %... Mean radius of the Earth (m)
-radiusEarth = 6378e3;
+radiusEarth = 6371e3;
 %... Meters per arc degree for the Earth's surface
 mPerDegree = pi*radiusEarth/180;
 
