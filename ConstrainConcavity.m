@@ -95,12 +95,12 @@ alpha = 5000;
 lambda = 1;
 
 %%%%% inverse scheme begins here %%%%%%%%%%%%%%%%%%%
-for sillygoose = 1:numel(mn_vec)
+for changing_mn = 1:numel(mn_vec)
      clear C
     clear A_full
     clear Model_damp
 
-    mn = mn_vec(sillygoose);
+    mn = mn_vec(changing_mn);
     C = chitransform(S, AS, 'mn', mn);
     C = C*mPerDegree;
     C = C/max(C)*10000;
@@ -678,8 +678,8 @@ for irow=1:n_pene
   misfit=misfit+abs(elev(irow)-predictions_pene(irow));             
 end
 misfit=((misfit))/n_pene;
-misfit_matrix(sillygoose) = misfit;
-fprintf(num2str(sillygoose))
+misfit_matrix(changing_mn) = misfit;
+fprintf(num2str(changing_mn))
 
 roughness_u=0.;
    for j=2:ny_grid-1
